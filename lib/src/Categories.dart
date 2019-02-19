@@ -10,42 +10,50 @@ class _CategoriesState extends State<Categories> {
     {
       'catImage': 'assets/icons/airtravel.png',
       'catName': 'Planes',
-      'catCount': 103
+      'catCount': 103,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/boat.png',
       'catName': 'Boat',
       'catCount': 73,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/bus.png',
       'catName': 'Buses',
       'catCount': 457,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/fastCar.png',
       'catName': 'Fast Cars',
-      'catCount': 342
+      'catCount': 342,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/run.png',
       'catName': 'Running',
       'catCount': 43,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/scooter.png',
       'catName': 'Scooter',
       'catCount': 903,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/ship.png',
       'catName': 'Ship',
       'catCount': 14,
+      'selected':false
     },
     {
       'catImage': 'assets/icons/yatch.png',
       'catName': 'Yatch',
       'catCount': 7,
+      'selected':false
     }
   ];
 
@@ -87,7 +95,7 @@ class _CategoriesState extends State<Categories> {
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 32.0,
+                  fontSize: 24.0,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w400,
                 ),
@@ -113,10 +121,20 @@ class _CategoriesState extends State<Categories> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     Map eachCategory = categories[index];
-                    return InkWell(
-                      onTap: () => null,
+                    return Container(
+                      height: _deviceHeight*0.25,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.pink[500], width: eachCategory['selected'] == true ? 2.5 : 0.0 // This is called the ternary operation, It's a shorter if-else statement,  look it up.)
+                      ),
+                      child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          eachCategory['selected'] = !eachCategory['selected'];
+                        });
+                      },
                       child: cardDisplay(eachCategory['catImage'],
                           eachCategory['catName'], eachCategory['catCount']),
+                    )  
                     );
                   },
                 ),
